@@ -268,86 +268,6 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(238, 108, 77, 0.6);
     }
-
-    /* Admin y Excel */
-    .admin-section {
-      background: rgba(0, 20, 35, 0.7);
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px dashed rgba(144, 224, 239, 0.4);
-    }
-
-    .admin-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .admin-header h3 {
-      font-size: 1rem;
-      color: var(--sea-foam);
-    }
-
-    .excel-btn {
-      background: #107c41;
-      color: white;
-      border: none;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 10px rgba(16, 124, 65, 0.3);
-    }
-
-    .excel-btn:hover {
-      background: #0b5c30;
-    }
-
-    .table-container {
-      overflow-x: auto;
-      max-height: 220px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.82rem;
-      text-align: left;
-    }
-
-    th, td {
-      padding: 9px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    th {
-      color: var(--sand-gold);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .empty-msg {
-      text-align: center;
-      color: #94a3b8;
-      font-size: 0.85rem;
-      padding: 18px 0;
-    }
-
-    .success-popup {
-      display: none;
-      background: rgba(0, 180, 216, 0.25);
-      border: 1px solid var(--sea-foam);
-      color: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-      margin-bottom: 18px;
-      font-weight: 600;
-    }
   </style>
 </head>
 <body>
@@ -404,48 +324,47 @@
       </div>
     </div>
 
-    <!-- Mensaje de éxito -->
-    <div id="successMsg" class="success-popup">
-      ¡Súper! Tu confirmación ya quedó guardada en la lista. ¡Nos vemos en el festejo! 🥳✨
-    </div>
-
-    <!-- Formulario RSVP -->
+    <!-- Formulario RSVP hacia tu Gmail -->
     <div class="form-section">
       <h2><i class="fa-solid fa-pen-to-square"></i> Confirmación de Asistencia</h2>
-      <form id="rsvpForm">
+      <form action="https://formsubmit.co/colquematematica@gmail.com" method="POST">
+        <!-- Redirección para evitar pantallas molestas -->
+        <input type="hidden" name="_next" value="https://solkkk.github.io/cumple-34/">
+        <input type="hidden" name="_captcha" value="false">
+
         <div class="form-group">
           <label for="nombre">Nombre Completo *</label>
-          <input type="text" id="nombre" placeholder="Ej: María Pérez" required>
+          <input type="text" id="nombre" name="Nombre Completo" placeholder="Ej: María Pérez" required>
         </div>
 
         <div class="form-group">
           <label for="dni">Número de DNI (Obligatorio para la Armada) *</label>
-          <input type="text" id="dni" placeholder="Ej: 38123456" required>
+          <input type="text" id="dni" name="DNI" placeholder="Ej: 38123456" required>
         </div>
 
         <div class="form-group">
           <label for="asistencia">¿Venís a festejar? *</label>
-          <select id="asistencia" required>
-            <option value="Si">¡Sí! De una, voy a bailar y jugar 💃🎮</option>
-            <option value="No">No puedo ir esta vez 😔</option>
+          <select id="asistencia" name="Asistencia" required>
+            <option value="¡Sí! Voy a bailar y jugar 💃🎮">¡Sí! De una, voy a bailar y jugar 💃🎮</option>
+            <option value="No puedo ir esta vez 😔">No puedo ir esta vez 😔</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="comida">¿Qué preferís comer?</label>
-          <select id="comida">
-            <option value="Hamburguesa">Hamburguesa 🍔</option>
-            <option value="Pancho">Pancho / Hot Dog 🌭</option>
-            <option value="Vegetariano/Otro">Vegetariano / Otro</option>
+          <select id="comida" name="Comida Preferida">
+            <option value="Hamburguesa 🍔">Hamburguesa 🍔</option>
+            <option value="Pancho 🌭">Pancho / Hot Dog 🌭</option>
+            <option value="Vegetariano / Otro">Vegetariano / Otro</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="sonido">¿Podés llevar Parlante / Sonido?</label>
-          <select id="sonido">
-            <option value="No">No tengo equipo</option>
-            <option value="Si - Parlante">¡Sí! Puedo llevar parlante 🔊</option>
-            <option value="Si - Otro">Tengo cables / Luces / Otro equipo</option>
+          <select id="sonido" name="Aporte Sonido">
+            <option value="No tengo equipo">No tengo equipo</option>
+            <option value="¡Sí! Puedo llevar parlante 🔊">¡Sí! Puedo llevar parlante 🔊</option>
+            <option value="Tengo cables / Luces / Otro">Tengo cables / Luces / Otro equipo</option>
           </select>
         </div>
 
@@ -453,124 +372,7 @@
       </form>
     </div>
 
-    <!-- Panel Admin / Excel -->
-    <div class="admin-section">
-      <div class="admin-header">
-        <h3><i class="fa-solid fa-list-check"></i> Lista para Ingreso a la Base</h3>
-        <button class="excel-btn" id="exportBtn">
-          <i class="fa-solid fa-file-excel"></i> Descargar Excel (CSV)
-        </button>
-      </div>
-
-      <div class="table-container">
-        <table id="guestTable">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>DNI</th>
-              <th>Asiste</th>
-              <th>Comida</th>
-              <th>Sonido</th>
-            </tr>
-          </thead>
-          <tbody id="guestBody">
-            <!-- Cargado con JS -->
-          </tbody>
-        </table>
-        <div id="emptyMsg" class="empty-msg">Todavía no hay confirmados anotados.</div>
-      </div>
-    </div>
-
   </div>
 
-  <script>
-    // LocalStorage
-    let guests = JSON.parse(localStorage.getItem('cumple34_invitados')) || [];
-
-    const rsvpForm = document.getElementById('rsvpForm');
-    const guestBody = document.getElementById('guestBody');
-    const emptyMsg = document.getElementById('emptyMsg');
-    const exportBtn = document.getElementById('exportBtn');
-    const successMsg = document.getElementById('successMsg');
-
-    function renderGuests() {
-      guestBody.innerHTML = '';
-      if (guests.length === 0) {
-        emptyMsg.style.display = 'block';
-        return;
-      }
-      emptyMsg.style.display = 'none';
-
-      guests.forEach((g) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${g.nombre}</strong></td>
-          <td>${g.dni}</td>
-          <td>${g.asistencia === 'Si' ? '✅ Sí' : '❌ No'}</td>
-          <td>${g.comida}</td>
-          <td>${g.sonido}</td>
-        `;
-        guestBody.appendChild(tr);
-      });
-    }
-
-    rsvpForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const newGuest = {
-        nombre: document.getElementById('nombre').value.trim(),
-        dni: document.getElementById('dni').value.trim(),
-        asistencia: document.getElementById('asistencia').value,
-        comida: document.getElementById('comida').value,
-        sonido: document.getElementById('sonido').value,
-        fecha: new Date().toLocaleString()
-      };
-
-      guests.push(newGuest);
-      localStorage.setItem('cumple34_invitados', JSON.stringify(guests));
-
-      renderGuests();
-      rsvpForm.reset();
-
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 110,
-          spread: 80,
-          origin: { y: 0.6 }
-        });
-      }
-
-      successMsg.style.display = 'block';
-      setTimeout(() => {
-        successMsg.style.display = 'none';
-      }, 4000);
-    });
-
-    // Exportación CSV/Excel
-    exportBtn.addEventListener('click', () => {
-      if (guests.length === 0) {
-        alert('Aún no hay personas confirmadas en la lista.');
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-      csvContent += "Nombre Completo,DNI,Asistencia,Comida,Aporta Sonido,Fecha Registro\n";
-
-      guests.forEach(g => {
-        let row = `"${g.nombre}","${g.dni}","${g.asistencia}","${g.comida}","${g.sonido}","${g.fecha}"`;
-        csvContent += row + "\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "Lista_BaseNaval_Cumple34.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-
-    renderGuests();
-  </script>
 </body>
 </html>
