@@ -89,10 +89,11 @@
       color: var(--sand-gold);
       font-size: 1.05rem;
       margin-bottom: 25px;
-      padding: 10px 15px;
+      padding: 12px 18px;
       background: rgba(247, 208, 112, 0.1);
       border-radius: 12px;
       border: 1px dashed rgba(247, 208, 112, 0.3);
+      line-height: 1.5;
     }
 
     /* Galería de Fotos */
@@ -337,7 +338,8 @@
     <div class="sub-title">Juegos & Baile 💃🎮🥳</div>
 
     <div class="birthday-quote">
-      ✈️ "Si no sabés qué regalarme... ¡regalame para mi próximo viaje!" 🧳✨
+      ✨ "La vida se mide en los momentos compartidos, las risas juntas y los viajes inolvidables." ✈️🧳<br>
+      <span style="font-size: 0.9rem; color: #e0f2fe; display: block; margin-top: 6px;">Si querés hacerme un regalo, ¡podés colaborar para mi próximo destino! 🌍</span>
     </div>
 
     <!-- Galería de Fotos -->
@@ -372,14 +374,14 @@
       <div class="info-card">
         <h3><i class="fa-solid fa-location-dot"></i> Ubicación</h3>
         <p>El Quincho de la Armada (Base Naval Ushuaia - Área Naval Austral)</p>
-        <a href="https://share.google/PLsd2CcWzCnVJLTIU" target="_blank" class="map-btn">
+        <a href="https://maps.app.goo.gl/YxEov18ppBY69NhC6" target="_blank" class="map-btn">
           <i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps
         </a>
       </div>
 
       <div class="info-card gift-card">
         <h3><i class="fa-solid fa-plane"></i> Regalos / Próximo Viaje 🎁✈️</h3>
-        <p>Tu presencia es lo más importante. Pero si querés hacerme un presente para mi próximo viaje, podés colaborar con:</p>
+        <p>Tu presencia es lo más importante. Si querés regalarme algo para sumar a mi próximo viaje, podés usar estos datos:</p>
         <div class="bank-details">
           <strong>Alias:</strong> Marisolnaranja25<br>
           <strong>CBU:</strong> 4530000800014891318069<br>
@@ -450,7 +452,6 @@
   </div>
 
   <script>
-    // Detectar si volvió de enviar el formulario para mostrar mensaje de éxito y confeti
     if (window.location.search.includes('enviado=true')) {
       document.getElementById('rsvpForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
