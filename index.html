@@ -78,9 +78,21 @@
       text-align: center;
       color: var(--sea-foam);
       font-size: 1.15rem;
-      margin-bottom: 25px;
+      margin-bottom: 12px;
       font-weight: 600;
       letter-spacing: 0.5px;
+    }
+
+    .birthday-quote {
+      text-align: center;
+      font-style: italic;
+      color: var(--sand-gold);
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+      padding: 10px 15px;
+      background: rgba(247, 208, 112, 0.1);
+      border-radius: 12px;
+      border: 1px dashed rgba(247, 208, 112, 0.3);
     }
 
     /* Galería de Fotos */
@@ -160,6 +172,12 @@
       grid-column: 1 / -1;
     }
 
+    .info-card.gift-card {
+      border-left-color: var(--sand-gold);
+      background: rgba(247, 208, 112, 0.12);
+      grid-column: 1 / -1;
+    }
+
     .info-card h3 {
       font-size: 0.95rem;
       color: var(--sea-foam);
@@ -169,7 +187,8 @@
       gap: 8px;
     }
 
-    .info-card.important h3 {
+    .info-card.important h3, 
+    .info-card.gift-card h3 {
       color: var(--sand-gold);
     }
 
@@ -177,6 +196,20 @@
       font-size: 0.9rem;
       line-height: 1.4;
       color: #e0f2fe;
+    }
+
+    .bank-details {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px dashed var(--sand-gold);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .bank-details strong {
+      color: var(--sand-gold);
     }
 
     .map-btn {
@@ -268,6 +301,28 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(238, 108, 77, 0.6);
     }
+
+    /* Mensaje de Confirmación Exitoso */
+    .success-message {
+      display: none;
+      background: rgba(46, 204, 113, 0.2);
+      border: 2px solid #2ecc71;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .success-message h3 {
+      color: #2ecc71;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .success-message p {
+      color: #e0f2fe;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
@@ -280,6 +335,10 @@
 
     <h1>Mis 34 Años 🎉</h1>
     <div class="sub-title">Juegos & Baile 💃🎮🥳</div>
+
+    <div class="birthday-quote">
+      ✈️ "Si no sabés qué regalarme... ¡regalame para mi próximo viaje!" 🧳✨
+    </div>
 
     <!-- Galería de Fotos -->
     <div class="gallery-container">
@@ -313,9 +372,21 @@
       <div class="info-card">
         <h3><i class="fa-solid fa-location-dot"></i> Ubicación</h3>
         <p>El Quincho de la Armada (Base Naval Ushuaia - Área Naval Austral)</p>
-        <a href="https://maps.google.com/?q=Base+Naval+Ushuaia" target="_blank" class="map-btn">
+        <a href="https://share.google/PLsd2CcWzCnVJLTIU" target="_blank" class="map-btn">
           <i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps
         </a>
+      </div>
+
+      <div class="info-card gift-card">
+        <h3><i class="fa-solid fa-plane"></i> Regalos / Próximo Viaje 🎁✈️</h3>
+        <p>Tu presencia es lo más importante. Pero si querés hacerme un presente para mi próximo viaje, podés colaborar con:</p>
+        <div class="bank-details">
+          <strong>Alias:</strong> Marisolnaranja25<br>
+          <strong>CBU:</strong> 4530000800014891318069<br>
+          <strong>Caja de Ahorro en Pesos:</strong> 1489131806<br>
+          <strong>Titular:</strong> Antonela Marisol Colque Escobar<br>
+          <strong>Entidad:</strong> Naranja X
+        </div>
       </div>
 
       <div class="info-card important">
@@ -327,9 +398,8 @@
     <!-- Formulario RSVP hacia tu Gmail -->
     <div class="form-section">
       <h2><i class="fa-solid fa-pen-to-square"></i> Confirmación de Asistencia</h2>
-      <form action="https://formsubmit.co/colquematematica@gmail.com" method="POST">
-        <!-- Redirección para evitar pantallas molestas -->
-        <input type="hidden" name="_next" value="https://solkkk.github.io/cumple-34/">
+      <form id="rsvpForm" action="https://formsubmit.co/colquematematica@gmail.com" method="POST">
+        <input type="hidden" name="_next" value="https://solkkk.github.io/cumple-34/?enviado=true">
         <input type="hidden" name="_captcha" value="false">
 
         <div class="form-group">
@@ -370,9 +440,27 @@
 
         <button type="submit" class="submit-btn">CONFIRMAR ASISTENCIA 🎉</button>
       </form>
+
+      <div id="successMsg" class="success-message">
+        <h3><i class="fa-solid fa-circle-check"></i> ¡Confirmación enviada!</h3>
+        <p>Muchas gracias por registrarte. Ya quedaste anotado/a para la lista de ingreso a la Base Naval. ¡Nos vemos pronto! 🥳✨</p>
+      </div>
     </div>
 
   </div>
+
+  <script>
+    // Detectar si volvió de enviar el formulario para mostrar mensaje de éxito y confeti
+    if (window.location.search.includes('enviado=true')) {
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
 
 </body>
 </html>
