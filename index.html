@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Mis 34 Años! | Festejo 🎉</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --ocean-dark: #003049;
+      --ocean-blue: #0077b6;
+      --turquoise: #00b4d8;
+      --sea-foam: #90e0ef;
+      --sand-gold: #f7d070;
+      --sunset-coral: #ff6f61;
+      --card-bg: rgba(255, 255, 255, 0.15);
+      --text-light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #001219 0%, #005f73 40%, #0a9396 70%, #ca6702 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      padding: 20px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+      background: rgba(10, 35, 50, 0.75);
+      border-radius: 24px;
+      border: 1px solid rgba(144, 224, 239, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 180, 216, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 25px;
+      margin: 0 auto;
+    }
+
+    .header-badge {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      background: linear-gradient(45deg, var(--sunset-coral), var(--sand-gold));
+      color: #002b36;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.3rem;
+      margin-bottom: 5px;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0, 180, 216, 0.5);
+    }
+
+    .sub-title {
+      text-align: center;
+      color: var(--sea-foam);
+      font-size: 1.15rem;
+      margin-bottom: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Galería de Fotos */
+    .gallery-container {
+      margin-bottom: 25px;
+      background: rgba(0, 48, 73, 0.4);
+      padding: 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-title {
+      text-align: center;
+      color: var(--sand-gold);
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(144, 224, 239, 0.5);
+      aspect-ratio: 1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Cards de Información */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-left: 4px solid var(--turquoise);
+      padding: 14px 16px;
+      border-radius: 10px;
+    }
+
+    .info-card.important {
+      border-left-color: var(--sunset-coral);
+      background: rgba(255, 111, 97, 0.12);
+      grid-column: 1 / -1;
+    }
+
+    .info-card h3 {
+      font-size: 0.95rem;
+      color: var(--sea-foam);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card.important h3 {
+      color: var(--sand-gold);
+    }
+
+    .info-card p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #e0f2fe;
+    }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(45deg, #0284c7, #0369a1);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: opacity 0.2s;
+    }
+
+    .map-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Formulario */
+    .form-section {
+      background: rgba(0, 24, 40, 0.6);
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(144, 224, 239, 0.2);
+      margin-bottom: 25px;
+    }
+
+    .form-section h2 {
+      text-align: center;
+      color: var(--sand-gold);
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+      color: var(--sea-foam);
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus {
+      border-color: var(--turquoise);
+      box-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
+    }
+
+    .form-group select option {
+      background: #002b36;
+      color: #fff;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(45deg, var(--sunset-coral), #e63946);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(238, 108, 77, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(238, 108, 77, 0.6);
+    }
+
+    /* Admin y Excel */
+    .admin-section {
+      background: rgba(0, 20, 35, 0.7);
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px dashed rgba(144, 224, 239, 0.4);
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .admin-header h3 {
+      font-size: 1rem;
+      color: var(--sea-foam);
+    }
+
+    .excel-btn {
+      background: #107c41;
+      color: white;
+      border: none;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px rgba(16, 124, 65, 0.3);
+    }
+
+    .excel-btn:hover {
+      background: #0b5c30;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      max-height: 220px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    th {
+      color: var(--sand-gold);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .empty-msg {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding: 18px 0;
+    }
+
+    .success-popup {
+      display: none;
+      background: rgba(0, 180, 216, 0.25);
+      border: 1px solid var(--sea-foam);
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="header-badge">
+      <span class="badge"><i class="fa-solid fa-calendar-day"></i> ¡Sábado 24 de Octubre!</span>
+    </div>
+
+    <h1>Mis 34 Años 🎉</h1>
+    <div class="sub-title">Juegos & Baile 💃🎮🥳</div>
+
+    <!-- Galería de Fotos -->
+    <div class="gallery-container">
+      <div class="gallery-title"><i class="fa-solid fa-camera-retro"></i> Momento de Fotos 📸</div>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="foto1.jpeg" alt="Cumpleañera 1" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+1'"></div>
+        <div class="gallery-item"><img src="foto2.jpeg" alt="Cumpleañera 2" onerror="this.src='https://via.placeholder.com/150x150?text=Foto+2'"></div>
+        <div class="gallery-item"><img src="foto3.jpeg" alt="Cumpleañera 3" onerror="this.src='https://via.placeholder.com/150x150?text=Foto+3'"></div>
+        <div class="gallery-item"><img src="foto4.jpeg" alt="Cumpleañera 4" onerror="this.src='https://via.placeholder.com/150x150?text=Foto+4'"></div>
+        <div class="gallery-item"><img src="foto5.jpeg" alt="Cumpleañera 5" onerror="this.src='https://via.placeholder.com/150x150?text=Foto+5'"></div>
+      </div>
+    </div>
+
+    <!-- Información del Evento -->
+    <div class="info-grid">
+      <div class="info-card">
+        <h3><i class="fa-regular fa-clock"></i> Horarios</h3>
+        <p>De <strong>20:00 hs</strong> a <strong>03:00 am</strong></p>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-burger"></i> Comida & Bebida</h3>
+        <p>Cada uno trae su bebida/alcohol. Hacemos Panchos o Hamburguesas 🌭🍔</p>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-compact-disc"></i> Sonido / Música</h3>
+        <p>¡Me falta equipo de sonido! Si tenés parlante/sonido avisame en la confirmación 🔊</p>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-location-dot"></i> Ubicación</h3>
+        <p>El Quincho de la Armada (Base Naval Ushuaia - Área Naval Austral)</p>
+        <a href="https://maps.google.com/?q=Base+Naval+Ushuaia" target="_blank" class="map-btn">
+          <i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps
+        </a>
+      </div>
+
+      <div class="info-card important">
+        <h3><i class="fa-solid fa-shield-halved"></i> ¡MUY IMPORTANTE PARA INGRESAR!</h3>
+        <p>Por ser dentro del predio militar de la Base Naval, es <strong>OBLIGATORIO</strong> estar registrado/a en el formulario de abajo con <strong>Nombre Completo y DNI</strong> para ingresar en el listado de la puerta.</p>
+      </div>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    <div id="successMsg" class="success-popup">
+      ¡Súper! Tu confirmación ya quedó guardada en la lista. ¡Nos vemos en el festejo! 🥳✨
+    </div>
+
+    <!-- Formulario RSVP -->
+    <div class="form-section">
+      <h2><i class="fa-solid fa-pen-to-square"></i> Confirmación de Asistencia</h2>
+      <form id="rsvpForm">
+        <div class="form-group">
+          <label for="nombre">Nombre Completo *</label>
+          <input type="text" id="nombre" placeholder="Ej: María Pérez" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dni">Número de DNI (Obligatorio para la Armada) *</label>
+          <input type="text" id="dni" placeholder="Ej: 38123456" required>
+        </div>
+
+        <div class="form-group">
+          <label for="asistencia">¿Venís a festejar? *</label>
+          <select id="asistencia" required>
+            <option value="Si">¡Sí! De una, voy a bailar y jugar 💃🎮</option>
+            <option value="No">No puedo ir esta vez 😔</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comida">¿Qué preferís comer?</label>
+          <select id="comida">
+            <option value="Hamburguesa">Hamburguesa 🍔</option>
+            <option value="Pancho">Pancho / Hot Dog 🌭</option>
+            <option value="Vegetariano/Otro">Vegetariano / Otro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sonido">¿Podés llevar Parlante / Sonido?</label>
+          <select id="sonido">
+            <option value="No">No tengo equipo</option>
+            <option value="Si - Parlante">¡Sí! Puedo llevar parlante 🔊</option>
+            <option value="Si - Otro">Tengo cables / Luces / Otro equipo</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">CONFIRMAR ASISTENCIA 🎉</button>
+      </form>
+    </div>
+
+    <!-- Panel Admin / Excel -->
+    <div class="admin-section">
+      <div class="admin-header">
+        <h3><i class="fa-solid fa-list-check"></i> Lista para Ingreso a la Base</h3>
+        <button class="excel-btn" id="exportBtn">
+          <i class="fa-solid fa-file-excel"></i> Descargar Excel (CSV)
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table id="guestTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>DNI</th>
+              <th>Asiste</th>
+              <th>Comida</th>
+              <th>Sonido</th>
+            </tr>
+          </thead>
+          <tbody id="guestBody">
+            <!-- Cargado con JS -->
+          </tbody>
+        </table>
+        <div id="emptyMsg" class="empty-msg">Todavía no hay confirmados anotados.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // LocalStorage
+    let guests = JSON.parse(localStorage.getItem('cumple34_invitados')) || [];
+
+    const rsvpForm = document.getElementById('rsvpForm');
+    const guestBody = document.getElementById('guestBody');
+    const emptyMsg = document.getElementById('emptyMsg');
+    const exportBtn = document.getElementById('exportBtn');
+    const successMsg = document.getElementById('successMsg');
+
+    function renderGuests() {
+      guestBody.innerHTML = '';
+      if (guests.length === 0) {
+        emptyMsg.style.display = 'block';
+        return;
+      }
+      emptyMsg.style.display = 'none';
+
+      guests.forEach((g) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${g.nombre}</strong></td>
+          <td>${g.dni}</td>
+          <td>${g.asistencia === 'Si' ? '✅ Sí' : '❌ No'}</td>
+          <td>${g.comida}</td>
+          <td>${g.sonido}</td>
+        `;
+        guestBody.appendChild(tr);
+      });
+    }
+
+    rsvpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const newGuest = {
+        nombre: document.getElementById('nombre').value.trim(),
+        dni: document.getElementById('dni').value.trim(),
+        asistencia: document.getElementById('asistencia').value,
+        comida: document.getElementById('comida').value,
+        sonido: document.getElementById('sonido').value,
+        fecha: new Date().toLocaleString()
+      };
+
+      guests.push(newGuest);
+      localStorage.setItem('cumple34_invitados', JSON.stringify(guests));
+
+      renderGuests();
+      rsvpForm.reset();
+
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 110,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      }
+
+      successMsg.style.display = 'block';
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 4000);
+    });
+
+    // Exportación CSV/Excel
+    exportBtn.addEventListener('click', () => {
+      if (guests.length === 0) {
+        alert('Aún no hay personas confirmadas en la lista.');
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+      csvContent += "Nombre Completo,DNI,Asistencia,Comida,Aporta Sonido,Fecha Registro\n";
+
+      guests.forEach(g => {
+        let row = `"${g.nombre}","${g.dni}","${g.asistencia}","${g.comida}","${g.sonido}","${g.fecha}"`;
+        csvContent += row + "\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "Lista_BaseNaval_Cumple34.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    renderGuests();
+  </script>
+</body>
+</html>
